@@ -48,6 +48,7 @@ regarding station management and resource allocation.
  
 ## Success: How do we know if we’ve solved this problem? 
 <b>High-level goal:</b> Enable users to interactively explore subway ridership data.
+
 <b>Measurable goals:</b>
 - Users can generate visuals for ridership patterns within 30 seconds of input.
 - The app accurately displays ridership statistics based on user selections (e.g., by station, time, or traffic direction).
@@ -74,7 +75,7 @@ filtering, and download capabilities.
 
 ## Risk: What are the biggest risks/unknowns -- both in the problem and in the proposed solution
 - Users may struggle with the complexity of the tool if not intuitive. 
-  - Mitigation: Ensure a simple, clean UI with a 'Help' document as needed.
+  - Mitigation: Ensure a clean UI, with a 'How-to Guide' document, if needed.
 - Inaccurate or outdated ridership data could skew the analysis. 
   - Mitigation: Regularly update data inputs and ensure consistency in the source as appropriate.
 
@@ -90,8 +91,8 @@ by Plotly, Seaborn, and Matplotlib.
 
 ## Tools Used
 1. MTA Open Data
-2. Python: Streamlit, NetworkX, Plotly, Matplotlib
-3. SQL: Duckdb
+2. Python: Streamlit, NetworkX, Plotly, Matplotlib, Duckdb (SQL)
+3. GitHub
 
 ## Who: Brief list of involved parties
 - Prototype: completed by Participant in MTA Open Data Challenge
