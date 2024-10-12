@@ -564,8 +564,8 @@ else:
     # Set the annotation to show node labels on hover
     @cursor.connect("add")
     def on_add(sel):
-        node_idx = list(G.nodes())[sel.index]  # Get the node index
-        sel.annotation.set_text(G.nodes[node_idx]["label"])  # Set hover text to node's label
+        node_name = list(G.nodes())[sel.index]
+        sel.annotation.set_text(node_name)
 
     edge_labels = {}
     for u, v, d in G.edges(data=True):
