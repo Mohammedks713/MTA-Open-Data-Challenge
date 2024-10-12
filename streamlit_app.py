@@ -490,7 +490,7 @@ def graph_pairs():
 # Generate graph table
 graph_pairs = graph_pairs()
 
-st.subheader(f"Graph of Selected Stations depicting {agg_option}")
+st.subheader(f"{agg_option} between selected subway stations")
 
 # Create the networkX graph and corresponding plot
 # Check if graph_pairs is empty
@@ -549,9 +549,9 @@ else:
     blues_custom = blues_mid(np.linspace(0.2, 0.9, 256))
 
     # create the graph
-    fig2, ax = plt.subplots(figsize=(8, 6))
-    pos = nx.spring_layout(G, k = 0.5, iterations=1000, weight = 'weight', scale = 1)
-    nx.draw(G, pos, with_labels=True,
+    fig2, ax = plt.subplots(figsize=(8, 8))
+    pos = nx.spring_layout(G, k = 0.3, iterations=1000, weight = 'weight', scale = 0.25)
+    nx.draw(G, pos, with_labels=False,
             node_size=scaled_node_sizes,
             connectionstyle='arc3, rad = 0.1',
             node_color= centrality_values, cmap=cm.colors.ListedColormap(blues_custom))
@@ -561,9 +561,12 @@ else:
     for u, v, d in G.edges(data=True):
         reverse_edge_exists = G.has_edge(v, u)
         edge_labels[(
-        u, v)] = f'{d["weight"]}\n\n{G.edges[(v, u)]["weight"]}' if reverse_edge_exists else f'{d["weight"]}\n\nN/A'
+        u, v)] = f'{d["weight"]}\n\n{G.edges[(v, u)]["weight"]}' if reverse_edge_exists else f'{d["weight"]}'
 
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='blue')
+
+    # Draw the labels with a specified font size
+    nx.draw_networkx_labels(G, pos, font_size=10)  # Adjust the font_size as needed
 
     plt.tight_layout()
     # Display the plot in Streamlit
@@ -592,3 +595,5 @@ st.write(f"The table below contains the underlying data and descriptive statisti
          f"in the network displayed above. ")
 st.dataframe(graph_pairs)
 
+if 'con' in locals():
+    con.close()
