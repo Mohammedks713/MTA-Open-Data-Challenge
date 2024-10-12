@@ -223,8 +223,8 @@ popular_stations = get_popular_stations()
 max_x_value = popular_stations['average_ridership'].max()
 max_y_value = popular_stations['median_ridership'].max()
 
-min_x_value = popular_stations['average_ridership'].min()
-min_y_value = popular_stations['median_ridership'].min()
+# min_x_value = popular_stations['average_ridership'].min()
+# min_y_value = popular_stations['median_ridership'].min()
 
 
 st.subheader("Popular Stations")
@@ -245,7 +245,7 @@ fig = px.scatter(popular_stations,
                      'median_ridership': True,
                      'variance_ridership': False,
                      'station': False},
-                 text='station',
+                 # text='station',
                  size_max=100,  # Max size for bubbles
                  labels={
                      "median_ridership": "Median Ridership",
@@ -254,13 +254,11 @@ fig = px.scatter(popular_stations,
                  },
                  title=f"Ridership by Station")
 
-fig.update_traces(
-    textposition='top center'
-)
+
 
 fig.update_layout(
-    xaxis=dict(showgrid=False, range=[min_x_value * 0.8, max_x_value * 1.2]),
-    yaxis=dict(showgrid=False, range=[min_y_value * 0.8, max_y_value * 1.2]),
+    xaxis=dict(showgrid=False, range=[0, max_x_value * 1.2]),
+    yaxis=dict(showgrid=False, range=[0, max_y_value * 1.2]),
     autosize=True
     # margin=dict(l=25, r=25, t=50, b=0)
 )
