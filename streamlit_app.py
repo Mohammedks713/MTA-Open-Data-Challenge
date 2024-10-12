@@ -17,7 +17,6 @@ from datetime import datetime
 import time
 import plotly.express as px
 import plotly.graph_objects as go
-import mplcursors
 
 # set df numeric formatting for floats
 pd.set_option('display.float_format', '{:.4f}'.format)
@@ -258,8 +257,8 @@ fig = px.scatter(popular_stations,
 
 
 fig.update_layout(
-    xaxis=dict(showgrid=False, range=[0, max_x_value * 1.3]),
-    yaxis=dict(showgrid=False, range=[0, max_y_value * 1.3]),
+    xaxis=dict(showgrid=False, range=[0, max_x_value * 1.25]),
+    yaxis=dict(showgrid=False, range=[0, max_y_value * 1.5]),
     autosize=True
     # margin=dict(l=25, r=25, t=50, b=0)
 )
@@ -550,22 +549,14 @@ else:
     blues_custom = blues_mid(np.linspace(0.2, 0.9, 256))
 
     # create the graph
-    fig2, ax = plt.subplots(figsize=(12, 8))
+    fig2, ax = plt.subplots(figsize=(8, 6))
     pos = nx.spring_layout(G, k = 0.5, iterations=1000, weight = 'weight', scale = 1)
     nx.draw(G, pos, with_labels=False,
             node_size=scaled_node_sizes,
             connectionstyle='arc3, rad = 0.1',
             node_color= centrality_values, cmap=cm.colors.ListedColormap(blues_custom))
 
-    # Create a cursor for hover functionality
-    cursor = mplcursors.cursor(hover=True)
 
-
-    # Set the annotation to show node labels on hover
-    @cursor.connect("add")
-    def on_add(sel):
-        node_name = list(G.nodes())[sel.index]
-        sel.annotation.set_text(node_name)
 
     edge_labels = {}
     for u, v, d in G.edges(data=True):
@@ -574,7 +565,7 @@ else:
         u, v)] = f'{d["weight"]}\n\n{G.edges[(v, u)]["weight"]}' if reverse_edge_exists else f'{d["weight"]}\n\nN/A'
 
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='blue')
-
+    plt.legend()
 
     # Display the plot in Streamlit
     st.pyplot(fig2)
