@@ -490,7 +490,7 @@ def graph_pairs():
 # Generate graph table
 graph_pairs = graph_pairs()
 
-st.subheader(f"Graph of Station pairs depicting {agg_option}")
+st.subheader(f"Graph of Selected Stations depicting {agg_option}")
 
 # Create the networkX graph and corresponding plot
 # Check if graph_pairs is empty
@@ -551,11 +551,10 @@ else:
     # create the graph
     fig2, ax = plt.subplots(figsize=(8, 6))
     pos = nx.spring_layout(G, k = 0.5, iterations=1000, weight = 'weight', scale = 1)
-    nx.draw(G, pos, with_labels=False,
+    nx.draw(G, pos, with_labels=True,
             node_size=scaled_node_sizes,
             connectionstyle='arc3, rad = 0.1',
             node_color= centrality_values, cmap=cm.colors.ListedColormap(blues_custom))
-
 
 
     edge_labels = {}
@@ -565,8 +564,8 @@ else:
         u, v)] = f'{d["weight"]}\n\n{G.edges[(v, u)]["weight"]}' if reverse_edge_exists else f'{d["weight"]}\n\nN/A'
 
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='blue')
-    plt.legend()
 
+    plt.tight_layout()
     # Display the plot in Streamlit
     st.pyplot(fig2)
 
