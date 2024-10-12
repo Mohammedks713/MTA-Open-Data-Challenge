@@ -257,8 +257,8 @@ fig = px.scatter(popular_stations,
 
 
 fig.update_layout(
-    xaxis=dict(showgrid=False, range=[0, max_x_value * 1.2]),
-    yaxis=dict(showgrid=False, range=[0, max_y_value * 1.2]),
+    xaxis=dict(showgrid=False, range=[0, max_x_value * 1.3]),
+    yaxis=dict(showgrid=False, range=[0, max_y_value * 1.3]),
     autosize=True
     # margin=dict(l=25, r=25, t=50, b=0)
 )
