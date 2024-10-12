@@ -17,6 +17,7 @@ from datetime import datetime
 import time
 import plotly.express as px
 import plotly.graph_objects as go
+import mplcursors
 
 # set df numeric formatting for floats
 pd.set_option('display.float_format', '{:.4f}'.format)
@@ -549,16 +550,22 @@ else:
     blues_custom = blues_mid(np.linspace(0.2, 0.9, 256))
 
     # create the graph
-    fig2, ax = plt.subplots(figsize=(10, 8))
+    fig2, ax = plt.subplots(figsize=(12, 8))
     pos = nx.spring_layout(G, k = 0.5, iterations=1000, weight = 'weight', scale = 1)
-    nx.draw(G, pos, with_labels=True,
+    nx.draw(G, pos, with_labels=False,
             node_size=scaled_node_sizes,
             connectionstyle='arc3, rad = 0.1',
             node_color= centrality_values, cmap=cm.colors.ListedColormap(blues_custom))
 
+    # Create a cursor for hover functionality
+    cursor = mplcursors.cursor(hover=True)
 
- #   edge_labels = dict([((u, v,), f'{d["weight"]}\n\n{G.edges[(v,u)]["weight"]}')
-  #                  for u, v, d in G.edges(data=True) if pos[u][0] > pos[v][0]])
+
+    # Set the annotation to show node labels on hover
+    @cursor.connect("add")
+    def on_add(sel):
+        node_idx = list(G.nodes())[sel.index]  # Get the node index
+        sel.annotation.set_text(G.nodes[node_idx]["label"])  # Set hover text to node's label
 
     edge_labels = {}
     for u, v, d in G.edges(data=True):

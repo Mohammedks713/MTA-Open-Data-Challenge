@@ -79,6 +79,7 @@ matplotlib-inline==0.1.7
 mdurl==0.1.2
 mistune==3.0.2
 more-itertools==10.3.0
+mplcursors==0.5.3
 narwhals==1.9.0
 nbclient==0.10.0
 nbconvert==7.16.4
