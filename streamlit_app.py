@@ -259,8 +259,8 @@ fig.update_traces(
 )
 
 fig.update_layout(
-    xaxis=dict(showgrid=False, range=[min_x_value * 0.9, max_x_value * 1.1]),
-    yaxis=dict(showgrid=False, range=[min_y_value * 0.95, max_y_value * 1.1]),
+    xaxis=dict(showgrid=False, range=[min_x_value * 0.8, max_x_value * 1.2]),
+    yaxis=dict(showgrid=False, range=[min_y_value * 0.8, max_y_value * 1.2]),
     autosize=True
     # margin=dict(l=25, r=25, t=50, b=0)
 )
